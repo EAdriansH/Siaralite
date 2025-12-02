@@ -8,12 +8,13 @@ import java.util.ArrayList;
  * Clase GestorInventario
  * Se encarga de la persistencia (Guardar/Cargar) y cálculos generales.
  */
-public class GestorInventario {
+public class GestorInventario 
+{
 
     // Nombre del archivo donde se guardarán los datos (se crea en la carpeta del proyecto)
     private final String ARCHIVO_BD = "inventario_siara.dat";
     
-    // La lista en memoria RAM donde trabajaremos mientras la app está abierta
+    // esta es la lista en memoria RAM donde trabajaremos mientras la app está abierta
     private ArrayList<Producto> listaProductos;
 
     public GestorInventario() {
@@ -35,13 +36,15 @@ public class GestorInventario {
      */
     public double obtenerActivoTotal() {
         double total = 0;
-        for (Producto p : listaProductos) {
-            total += p.calcularValorInventario();
+        for (Producto p : listaProductos) 
+        {
+            total =total+p.calcularValorInventario();
         }
         return total;
     }
 
-    public ArrayList<Producto> getListaProductos() {
+    public ArrayList<Producto> getListaProductos()
+    {
         return listaProductos;
     }
 
@@ -59,7 +62,8 @@ public class GestorInventario {
     }
 
     // Lee la lista del archivo .dat
-    private ArrayList<Producto> cargarDelArchivo() {
+    private ArrayList<Producto> cargarDelArchivo()
+    {
         ArrayList<Producto> lista = new ArrayList<>();
         File archivo = new File(ARCHIVO_BD);
 
