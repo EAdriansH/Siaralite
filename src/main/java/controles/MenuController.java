@@ -7,13 +7,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*; // Importa Botones, Labels, Tablas
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * Clase MenuController
- * Controla la interacción entre la ventana visual (FXML) y la lógica Java.
+/*
+ *Clase MenuController 
+ *Controla la interacción entre la ventana visual (FXML) y la lógica Java.
+ * 
  */
+
 public class MenuController 
 {
- // --- ELEMENTOS VISUALES (Conectados con SceneBuilder vía fx:id) ---
+/*
+  * Antes de agregarlo se paso la clase MenuController al apartado de controller class que permite asociar una clase al scenebuilder    
+  * ELEMENTOS VISUALES (Conectados con SceneBuilder vía fx:id) 
+  * son variables de tipo privado los cuales tienen como nombre para identificacion sencilla txtNombre
+  * ya que son los nombres que recibira el scenebuilder
+  * en [SCENEBUILDER]: en el apartado de code hay un identificador que dice asi fx:id (txtNombre)
+  *
+  */
     
     @FXML private TextField txtCodigo;
     @FXML private TextField txtNombre;
@@ -22,14 +31,18 @@ public class MenuController
     @FXML private TextField txtStock;
     
     @FXML private Label lblTotalDinero; // Etiqueta para mostrar el reporte contable
-
+    /*
+    en si esto es una tabla que recibe de parametro a Producto es como una asociacion
+    */
     @FXML private TableView<Producto> tablaProductos; // La tabla principal
-    
-    @FXML private TableColumn<Producto, String> colNombre;
+    /*si deseamos agregar otra columna a la tabla necesitamos agregar un nombre de identificacion*/
+    @FXML private TableColumn<Producto, String> colNombre;//columnaNombre
     @FXML private TableColumn<Producto, Double> colPrecio;
     @FXML private TableColumn<Producto, Integer> colStock;
 
-    // --- OBJETOS DE LÓGICA ---
+    /*
+    OBJETOS DE LÓGICA 
+    */
     private GestorInventario gestor;
     // Lista especial de JavaFX que actualiza la tabla automáticamente
     private ObservableList<Producto> listaVisual; 
@@ -59,7 +72,8 @@ public class MenuController
      * Método vinculado al BOTÓN "GUARDAR" en SceneBuilder
      */
     @FXML
-    private void clicGuardar() {
+    private void clicGuardar() 
+    {
         try 
         {
             // 1. Obtenemos datos de las cajitas de texto

@@ -1,4 +1,5 @@
-module com.mycompany.siaralite {
+module com.mycompany.siaralite 
+{
     requires javafx.controls;
     requires javafx.fxml;
 

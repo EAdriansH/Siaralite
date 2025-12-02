@@ -11,13 +11,20 @@ import java.util.ArrayList;
 public class GestorInventario 
 {
 
-    // Nombre del archivo donde se guardarán los datos (se crea en la carpeta del proyecto)
+    /**
+    *Nombre del archivo donde se guardarán los datos (se crea en la carpeta del proyecto)
+    *
+    */
     private final String ARCHIVO_BD = "inventario_siara.dat";
     
-    // esta es la lista en memoria RAM donde trabajaremos mientras la app está abierta
+    /*
+    esta es la lista en memoria RAM donde trabajaremos mientras la app está abierta
+    se crea un objeto de tipo arraylist el cual recibe como parametro Producto el cual proviene de modelos
+    */
     private ArrayList<Producto> listaProductos;
 
-    public GestorInventario() {
+    public GestorInventario() 
+    {
         // Al iniciar el gestor, intentamos cargar lo que haya en el archivo
         this.listaProductos = cargarDelArchivo();
     }
@@ -25,7 +32,8 @@ public class GestorInventario
     /**
      * Agrega un producto a la lista y guarda cambios en el disco duro.
      */
-    public void agregarProducto(Producto p) {
+    public void agregarProducto(Producto p) 
+    {
         listaProductos.add(p);
         guardarEnArchivo(); // ¡Guardado automático!
     }
@@ -34,9 +42,10 @@ public class GestorInventario
      * Método para la Expo de Contabilidad.
      * Suma el valor de todos los productos para saber el Activo total.
      */
-    public double obtenerActivoTotal() {
+    public double obtenerActivoTotal() 
+    {
         double total = 0;
-        for (Producto p : listaProductos) 
+        for (Producto p : listaProductos) //for each para reconocer
         {
             total =total+p.calcularValorInventario();
         }
