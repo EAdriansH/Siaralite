@@ -41,9 +41,11 @@ public class MenuController
     @FXML private TableColumn<Producto, Integer> colStock;
 
     /*
-    OBJETOS DE LÓGICA 
+    *OBJETOS DE LÓGICA 
     */
+    //objeto gestor el cual hace que se inicialize el gestor de inventario
     private GestorInventario gestor;
+    
     // Lista especial de JavaFX que actualiza la tabla automáticamente
     private ObservableList<Producto> listaVisual; 
 
@@ -94,18 +96,20 @@ public class MenuController
             actualizarReporteContable();
             limpiarCampos();
             
-            // Mensaje de éxito (Opcional: Usar Alert)
-            System.out.println("✅ Producto registrado.");
+            // Mensaje de éxito (falta adaptar estos mensajes con un JOptionPane)
+            System.out.println("Producto registrado.");
 
         } 
-        catch (NumberFormatException e) {
-            System.out.println("❌ Error: Ingresa números válidos en precio/stock");
+        catch (NumberFormatException e) 
+        {
+            System.out.println("Error: Ingresa numeros válidos en precio/stock");
         }
     }
 
     // --- MÉTODOS AUXILIARES ---
 
-    private void actualizarTabla() {
+    private void actualizarTabla() 
+    {
         // Convertimos la ArrayList normal a una ObservableList de JavaFX
         listaVisual = FXCollections.observableArrayList(gestor.getListaProductos());
         tablaProductos.setItems(listaVisual);

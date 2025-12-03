@@ -60,14 +60,20 @@ public class GestorInventario
     // --- MÉTODOS PRIVADOS DE ARCHIVOS (La parte técnica) ---
 
     // Escribe la lista en el archivo .dat
-    private void guardarEnArchivo() {
+    private void guardarEnArchivo() 
+    {
         // Try-with-resources: Cierra el archivo automáticamente al terminar
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_BD))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_BD))) 
+        {
             oos.writeObject(listaProductos);
+            
             System.out.println("Datos guardados en disco.");
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             System.err.println("Error al guardar: " + e.getMessage());
         }
+        
     }
 
     // Lee la lista del archivo .dat
@@ -76,11 +82,15 @@ public class GestorInventario
         ArrayList<Producto> lista = new ArrayList<>();
         File archivo = new File(ARCHIVO_BD);
 
-        if (archivo.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARCHIVO_BD))) {
+        if (archivo.exists()) 
+        {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARCHIVO_BD))) 
+            {
                 lista = (ArrayList<Producto>) ois.readObject();
                 System.out.println("Datos recuperados exitosamente.");
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 System.err.println("Error al cargar archivo: " + e.getMessage());
             }
         }
