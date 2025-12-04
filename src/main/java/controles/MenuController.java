@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*; // Importa Botones, Labels, Tablas
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.JOptionPane;
 
 /*
  *Clase MenuController 
@@ -77,6 +78,8 @@ public class MenuController
     /**
      * Método vinculado al BOTÓN "GUARDAR" en SceneBuilder
      */
+
+
 @FXML
     private void clicGuardar() 
     {
@@ -111,7 +114,8 @@ public class MenuController
         }
     }
 @FXML
-    private void clicEliminar() {
+    private void clicEliminar() 
+    {
         // 1. Preguntamos a la tabla: "¿Qué renglón seleccionó el usuario?"
         Producto seleccionado = tablaProductos.getSelectionModel().getSelectedItem();
 
@@ -167,6 +171,70 @@ public class MenuController
         catch (NumberFormatException e) 
         {
             System.out.println("Error: Revisa que los numeros sean correctos.");
+        }
+    }
+    
+@FXML
+    private void clicVender() 
+    {
+        // 1. Obtener el producto seleccionado en la tabla
+        Producto p = tablaProductos.getSelectionModel().getSelectedItem();
+
+        // Validación: ¿Seleccionó algo?
+        if (p == null)
+        {
+            JOptionPane.showMessageDialog(null, "Selecciona un producto de la tabla para vender.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Pedir la cantidad a vender
+        String input = JOptionPane.showInputDialog(
+                null,"Producto: " + p.getNombre() + "\nStock actual: " + p.getStock() + "\n\n¿Cuántos vas a vender?");
+
+        // Si el usuario le da "Cancelar" o no escribe nada, nos salimos
+        if (input == null || input.isEmpty()) 
+        {
+            return;
+        }
+
+        try
+        {
+            int cantidad = Integer.parseInt(input);
+
+            // Validar que no pida negativos o cero
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 3. Llamar al GESTOR para intentar la venta
+            boolean ventaExitosa = gestor.registrarVenta(p, cantidad);
+
+            if (ventaExitosa) {
+                // Calcular cuánto dinero entró (para mostrarlo)
+                double totalVenta = cantidad * p.getPrecioVenta();
+                
+                // 4. Actualizar la vista
+                tablaProductos.refresh(); // Refresca la tabla para ver el nuevo stock
+                actualizarReporteContable(); // Actualiza el total del inventario
+                
+                JOptionPane.showMessageDialog(null, 
+                        "¡Venta Registrada!\n\nSe vendieron " + cantidad + " unidades.\nTotal a cobrar: $" + totalVenta, 
+                        "Venta Exitosa", 
+                        JOptionPane.INFORMATION_MESSAGE);
+            } 
+            else 
+            {
+                // Si el gestor dijo false (no hay stock)
+                JOptionPane.showMessageDialog(null, 
+                        "No hay suficiente stock.\nSolo tienes " + p.getStock() + " unidades.", 
+                        "Error de Stock", 
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } 
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingresa solo números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     // --- MÉTODOS AUXILIARES ---

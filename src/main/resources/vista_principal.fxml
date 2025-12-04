@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="451.0" prefWidth="834.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="557.0" prefWidth="834.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controles.MenuController">
    <children>
       <TableView fx:id="tablaProductos" layoutX="249.0" layoutY="28.0" onMouseClicked="#llenarCamposParaEditar" prefHeight="200.0" prefWidth="518.0">
         <columns>
@@ -36,5 +36,6 @@
       <Label layoutX="14.0" layoutY="276.0" text="Stock" />
       <Button cancelButton="true" layoutX="703.0" layoutY="294.0" mnemonicParsing="false" onAction="#clicEliminar" style="-fx-background-color: #ffcccc;" text="Eliminar" textAlignment="CENTER" />
       <Button layoutX="698.0" layoutY="245.0" mnemonicParsing="false" onAction="#clicActualizar" style="-fx-background-color: #89CFF0;" text="Actualizar" />
+      <Button layoutX="243.0" layoutY="258.0" mnemonicParsing="false" onAction="#clicVender" style="-fx-background-color: #FFA500;" text="VENDER" />
    </children>
 </AnchorPane>

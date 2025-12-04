@@ -97,6 +97,28 @@ public class GestorInventario
         System.out.println("Cambios de edicion guardados en disco.");
     }
     // Lee la lista del archivo .dat
+    /**
+     * Intenta realizar una venta restando del stock.
+     * Retorna TRUE si se pudo vender, FALSE si no hay suficiente stock.
+     */
+    public boolean registrarVenta(Producto p, int cantidad) 
+    {
+        // 1. Validar que haya suficiente mercancía
+        if (p.getStock() >= cantidad) 
+        {
+            // 2. Restar el stock
+            int nuevoStock = p.getStock() - cantidad;
+            p.setStock(nuevoStock);
+            
+            // 3. Guardar el cambio en el archivo .dat
+            guardarCambios(); 
+            return true; // Venta exitosa
+        } 
+        else 
+        {
+            return false; // No alcanzó el stock
+        }
+    }
     private ArrayList<Producto> cargarDelArchivo()
     {
         ArrayList<Producto> lista = new ArrayList<>();
