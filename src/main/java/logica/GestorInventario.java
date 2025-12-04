@@ -1,4 +1,5 @@
 package logica;
+
 import modelos.Producto;
 
 import java.io.*; // Librería para manejo de archivos
@@ -35,7 +36,7 @@ public class GestorInventario
     public void agregarProducto(Producto p) 
     {
         listaProductos.add(p);
-        guardarEnArchivo(); // ¡Guardado automático!
+        guardarEnArchivo(); // Guardado automático
     }
 
     /**
@@ -45,7 +46,7 @@ public class GestorInventario
     public double obtenerActivoTotal() 
     {
         double total = 0;
-        for (Producto p : listaProductos) //for each para reconocer
+        for (Producto p : listaProductos) //for each para repasar la lista de productos
         {
             total =total+p.calcularValorInventario();
         }
@@ -56,7 +57,7 @@ public class GestorInventario
     {
         return listaProductos;
     }
-
+    
     // --- MÉTODOS PRIVADOS DE ARCHIVOS (La parte técnica) ---
 
     // Escribe la lista en el archivo .dat
@@ -75,7 +76,26 @@ public class GestorInventario
         }
         
     }
-
+    /**
+     * Elimina un producto de la lista y actualiza el archivo .dat
+     */
+    public void eliminarProducto(Producto p) 
+    {
+        // ArrayList ya tiene un método mágico para borrar
+        listaProductos.remove(p);
+        //Guardamos cambios inmediatamente para que no se pierda el borrado
+        guardarEnArchivo(); 
+        System.out.println("Producto eliminado"+p.getNombre());
+    }
+    /**
+     * Guarda los cambios de forma forzada en el archivo.
+     * Se usa después de editar un producto existente.
+     */
+    public void guardarCambios() 
+    {
+        guardarEnArchivo();
+        System.out.println("Cambios de edicion guardados en disco.");
+    }
     // Lee la lista del archivo .dat
     private ArrayList<Producto> cargarDelArchivo()
     {
